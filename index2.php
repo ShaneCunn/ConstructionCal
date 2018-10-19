@@ -6,7 +6,7 @@
  * Time: 17:56
  */
 require 'dbConfig.php';
-
+$title = "Ajax Cal";
 db();
 global $conn;
 $value = $name = $id = $maxamount = null;
@@ -30,7 +30,7 @@ $data = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-  <!--  <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">-->
+    <!--  <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="assests/css/boostrap.min.css">
     <style>
 
@@ -44,13 +44,15 @@ $data = $conn->query($sql);
         }
     </style>
 
-    <title>Hello, world!</title>
+    <title><?= $title ?></title>
 </head>
 <body>
 
 <main role="main" class="container">
     <div class="container">
         <h2>Object drain table</h2>
+
+
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -68,9 +70,9 @@ $data = $conn->query($sql);
                     <td class="quantity">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Amount</label>
+                                <label class="input-group-text" for="inputGroupSelect01"></label>
                             </div>
-                            <select class="custom-select" id="inputGroupSelect01">
+                            <select class="custom-select one" id="inputGroupSelect01">
 
                                 <?php
                                 $maxamount = $row['amountMax'];
@@ -102,20 +104,44 @@ $data = $conn->query($sql);
 <script src="vendor/components/jquery/jquery.min.js"></script>
 <script src="vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    calc_total();
 
+
+    // alert('test');
     $(".custom-select").on('change', function () {
+       // var test =
 
         var parent = $(this).closest('tr');
-        var price = parseFloat($('.valueAmount', parent).text());
+        var choose1 = parseFloat($('.one', parent).val());
 
-        var choose = parseFloat($('.custom-select', parent).val());
+        console.log('test ' + choose1);
 
-        console.log(price);
-        console.log(choose);
-        $('.subtotal', parent).text(choose * price);
-        calc_total();
+
+        $.ajax({
+            url: "ajax/response.php", // json datasource
+            data: {action: 'getData' , choose1 : choose1}, // Set the POST variable  array and adds action: getEMP
+            type: 'post',  // method  , by default get
+            success: function (data) {
+                console.log(data);
+            }
+
+        });
     })
+
+
+    //  calc_total();
+    /*
+            $(".custom-select").on('change', function () {
+
+                var parent = $(this).closest('tr');
+                var price = parseFloat($('.valueAmount', parent).text());
+
+                var choose = parseFloat($('.custom-select', parent).val());
+
+                console.log(price);
+                console.log(choose);
+                $('.subtotal', parent).text(choose * price);
+              //  calc_total();
+            })*/
 
     function calc_total() {
         var sum = 0;
