@@ -81,3 +81,13 @@ fabric.properties
 
 
 
+.idea/.name
+.idea/ConstructionCal.iml
+.idea/deployment.xml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/php.xml
+.idea/vcs.xml
+test.vue
+vendor/
