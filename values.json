@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Cortium Silo",
+    "usage": 2,
+    "amount": 1
+  },
+  {
+    "id": 2,
+    "name": "Repair Module",
+    "usage": 0.5,
+    "amount": 10
+  },
+  {
+    "id": 3,
+    "name": "Turret AI Module",
+    "usage": 0.5,
+    "amount": 10
+  },
+  {
+    "id": 4,
+    "name": "Structure Shield Module",
+    "usage": 0.5,
+    "amount": 10
+  },
+  {
+    "id": 5,
+    "name": "Alarm Module",
+    "usage": 0.5,
+    "amount": 10
+  },
+  {
+    "id": 6,
+    "name": "Reinforcements Module",
+    "usage": 2,
+    "amount": 5
+  },
+  {
+    "id": 7,
+    "name": "Vehicle Gate",
+    "usage": 0.5,
+    "amount": 2
+  },
+  {
+    "id": 8,
+    "name": "Orbital Strike Uplink",
+    "usage": 4,
+    "amount": 1
+  },
+  {
+    "id": 9,
+    "name": "Routing spire",
+    "usage": 1,
+    "amount": 3
+  },
+  {
+    "id": 10,
+    "name": "Pain Spire",
+    "usage": 1,
+    "amount": 5
+  }
+]
