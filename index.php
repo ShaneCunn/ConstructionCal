@@ -26,11 +26,38 @@ $title = "Construction calculator for base drain"
     <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet"/>
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="assets/css/demo.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <style>
         .hidden {
             display: none;
             visibility: hidden;
         }
+
+        .counter {
+            background-color: #f5f5f5;
+            padding: 20px 0;
+           /* border-radius: 5px;*/
+        }
+
+        .count-title {
+            font-size: 40px;
+            font-weight: normal;
+            margin-top: 10px;
+            margin-bottom: 0;
+            text-align: center;
+            margin-left: 20px;
+        }
+
+        .count-text {
+            font-size: 13px;
+            font-weight: normal;
+            margin-top: 10px;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+
     </style>
     <title><?= $title ?></title>
 </head>
@@ -41,18 +68,33 @@ $title = "Construction calculator for base drain"
         <div class="card-body table-full-width table-responsive">
             <table class="table table-hover table-striped">
 
-                <div class="card-header ">
-                    <h4 class="card-title"><?= $title ?></h4>
 
-                    <p class="card-category">This is a very simple calculator for working out how much Cortium you are
-                        currently using</p>
-                    <div class="row">
-                        <div class="col perhour font-weight-bold">10</div>
-                        <div class="col perminute font-weight-bold">0</div>
-                        <div class="col fulltotal font-weight-bold">0</div>
-                    </div>
+                <h4 class="card-title"><?= $title ?></h4>
+
+                <p class="card-category">This is a very simple calculator for working out how much Cortium you are
+                    currently using</p>
+
+                <div class="row text-center">
+
+
+                        <div class="col counter">
+                            <h2 class="perhour timer count-title count-number"></h2>
+                            <p class="count-text">Per hour</p>
+                        </div>
+
+                        <div class="col counter">
+                            <h2 class="perminute timer count-title count-number"></h2>
+                            <p class="count-text ">Per minute</p>
+                        </div>
+
+                        <div class="col counter">
+                            <h2 class="fulltotal timer count-title count-number"></h2>
+                            <p class="count-text ">Per second</p>
+                        </div>
+
 
                 </div>
+
                 <thead>
                 <tr>
                     <th>Construction Object</th>
@@ -69,8 +111,8 @@ $title = "Construction calculator for base drain"
                         <div class="input-group mb-3">
                             <select class="custom-select" id="inputGroupSelect01">
 
-                                <option value="0" class="qty">1</option>
-                                <option value="1" class="qty">1</option>
+
+                                <option value="1" class="qty" selected>1</option>
                         </div>
                     </td>
                     <td class="subtotal hidden">2</td>

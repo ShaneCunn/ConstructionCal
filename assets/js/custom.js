@@ -1,14 +1,18 @@
+/*window.onbeforeunload = function () {
+    return "Data will be lost if you leave the page, are you sure?";
+};*/
+
 calc_total();
 
 $(".custom-select").on('change', function () {
 
-    var parent = $(this).closest('tr');
-    var price = parseFloat($('.valueAmount', parent).text());
-    var choose = parseFloat($('.custom-select', parent).val());
+    const parent = $(this).closest('tr');
+    const price = parseFloat($('.valueAmount', parent).text());
+    const choose = parseFloat($('.custom-select', parent).val());
 
     $('.subtotal', parent).text(choose * price);
     calc_total();
-})
+});
 
 
 function formatMoney(n, c, d, t) {
@@ -23,13 +27,13 @@ function formatMoney(n, c, d, t) {
 };
 
 function calc_total() {
-    var sum = 0;
-    var parent = $(this).closest('tr');
+    let sum = 0;
+
     $('.subtotal').each(function () {
         sum += parseFloat($(this).text());
-        $('.fulltotal').text("Per second: " + sum);
-        $('.perminute').text('Per Minute: ' + formatMoney(sum * 60));
-        $('.perhour').text("Per hour: " + formatMoney(sum * 60 * 60));
+        $('.fulltotal').text(sum);
+        $('.perminute').text(formatMoney(sum * 60));
+        $('.perhour').text(formatMoney(sum * 60 * 60));
 
     })
 }
