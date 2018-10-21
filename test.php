@@ -9,8 +9,8 @@
 
 $url = 'values.json';
 $data = file_get_contents($url);
-$arrrayData = json_decode($data);
-
+$arrayData = json_decode($data);
+$title = "Construction calculator for base drain "
 
 ?>
 
@@ -22,8 +22,7 @@ $arrrayData = json_decode($data);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <!--  <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="assests/css/boostrap.min.css">
+    <link rel="stylesheet" href="assets/css/boostrap.min.css">
     <style>
 
         body {
@@ -36,7 +35,7 @@ $arrrayData = json_decode($data);
         }
     </style>
 
-    <title>Hello, world!</title>
+    <title><?= $title ?></title>
 </head>
 <body>
 
@@ -46,14 +45,14 @@ $arrrayData = json_decode($data);
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>Object name</th>
+                <th>Construction Object</th>
                 <th>Drain rate</th>
-                <th>amount</th>
+                <th>Amount</th>
                 <th>Sub total:</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($arrrayData as $key => $value) : ?>
+            <?php foreach ($arrayData as $key => $value) : ?>
                 <tr>
                     <td><?= $value->name ?></td>
                     <td class="valueAmount"><?= $value->usage ?></td>
@@ -89,39 +88,9 @@ $arrrayData = json_decode($data);
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="assests/js/jquery.min.js"></script>
-<script src="assests/js/bootstrap.bundle.js"></script>
-<script>
-    calc_total();
-
-    $(".custom-select").on('change', function () {
-
-        var parent = $(this).closest('tr');
-        var price = parseFloat($('.valueAmount', parent).text());
-
-        var choose = parseFloat($('.custom-select', parent).val());
-
-      //  console.log(price);
-      //  console.log(choose);
-        $('.subtotal', parent).text(choose * price);
-        calc_total();
-    })
-
-    function calc_total() {
-        var sum = 0;
-       // console.log('subtotal is: ' + parseFloat($('#subtotal').text()))
-        var parent = $(this).closest('tr');
-        $('.subtotal').each(function () {
-
-            sum += parseFloat($(this).text());
-          //  console.log('total is: ' + sum);
-         //   console.log('test is: ' + parseFloat($(this).text()));
-        });
-        $('.fulltotal').text('Per second: ' + sum);
-        $('.perminute').text('Per minute: ' + sum * 60);
-        $('.perhour').text('Per Hour: ' + sum * 60 * 60);
-    }
-
-</script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.bundle.js"></script>
+<script src="assets/js/custom.js"></script>
+`2 <q>`</q>
 </body>
 </html>

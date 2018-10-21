@@ -21,7 +21,7 @@
 
     <!-- Bootstrap CSS -->
     <!--  <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="assests/css/boostrap.min.css">
+    <link rel="stylesheet" href="assets/css/boostrap.min.css">
     <style>
 
         body {

@@ -1,11 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Cortium Silo",
-    "usage": 2,
-    "amount": 1
-  },
-  {
     "id": 2,
     "name": "Repair Module",
     "usage": 0.5,
@@ -39,7 +33,7 @@
     "id": 7,
     "name": "Vehicle Gate",
     "usage": 0.5,
-    "amount": 2
+    "amount": 10
   },
   {
     "id": 8,

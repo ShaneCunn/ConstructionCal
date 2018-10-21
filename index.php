@@ -5,21 +5,13 @@
  * Date: 17/10/2018
  * Time: 17:56
  */
-require 'dbConfig.php';
-
-db();
-global $conn;
-$value = $name = $id = $maxamount = null;
-$sql = "SELECT id, name, amountMax, value FROM valuesforobjects";
-$data = $conn->query($sql);
-/*while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
-    $id = $row['id'];
-    $name = $row['name'];
-    $value = $row['value'];
-}*/
 
 
-//echo 'you filled title ' . $name . '<br> and description ' . $value;
+$url = 'values.json';
+$data = file_get_contents($url);
+$arrayData = json_decode($data);
+$title = "Construction calculator for base drain"
+
 ?>
 
 <!doctype html>
@@ -28,110 +20,92 @@ $data = $conn->query($sql);
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
     <!-- Bootstrap CSS -->
-    <!--  <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="assests/css/boostrap.min.css">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet"/>
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="assets/css/demo.css" rel="stylesheet"/>
     <style>
-
-        body {
-            padding-top: 5rem;
-        }
-
-        .starter-template {
-            padding: 3rem 1.5rem;
-            text-align: center;
+        .hidden {
+            display: none;
+            visibility: hidden;
         }
     </style>
-
-    <title>Hello, world!</title>
+    <title><?= $title ?></title>
 </head>
 <body>
 
 <main role="main" class="container">
     <div class="container">
-        <h2>Object drain table</h2>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Object name</th>
-                <th>Drain rate</th>
-                <th>amount</th>
-                <th>Sub total:</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($data as $row) : ?>
+        <div class="card-body table-full-width table-responsive">
+            <table class="table table-hover table-striped">
+
+                <div class="card-header ">
+                    <h4 class="card-title"><?= $title ?></h4>
+
+                    <p class="card-category">This is a very simple calculator for working out how much Cortium you are
+                        currently using</p>
+                    <div class="row">
+                        <div class="col perhour font-weight-bold">10</div>
+                        <div class="col perminute font-weight-bold">0</div>
+                        <div class="col fulltotal font-weight-bold">0</div>
+                    </div>
+
+                </div>
+                <thead>
                 <tr>
-                    <td><?= $row['name'] ?></td>
-                    <td class="valueAmount"><?= $row['value'] ?></td>
+                    <th>Construction Object</th>
+                    <th>Drain rate</th>
+                    <th>Amount</th>
+                    <th class="hidden">Sub total:</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Cortium Silo</td>
+                    <td class="valueAmount">2</td>
                     <td class="quantity">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Amount</label>
-                            </div>
                             <select class="custom-select" id="inputGroupSelect01">
 
-                                <?php
-                                $maxamount = $row['amountMax'];
-                                for ($i = 0; $i <= $maxamount; $i++)
-                                    echo '<option value="' . $i . '" class="qty">' . $i . '</option>';
-                                ?>
+                                <option value="0" class="qty">1</option>
+                                <option value="1" class="qty">1</option>
                         </div>
                     </td>
-                    <td class="subtotal">0</td>
+                    <td class="subtotal hidden">2</td>
                 </tr>
-            <?php endforeach; ?>
-            <tr>
-                <td>Total:</td>
-                <td class="perhour">Per second:10</td>
-                <td class="perminute">per minute:20</td>
-                <td>
-                    <div class="fulltotal" 0
-    </div
-    </td>
+                <?php foreach ($arrayData as $key => $value) : ?>
+                    <tr>
+                        <td><?= $value->name ?></td>
+                        <td class="valueAmount"><?= $value->usage ?></td>
+                        <td class="quantity">
+                            <div class="input-group mb-3">
+                                <select class="custom-select" id="inputGroupSelect01">
+
+                                    <?php
+
+                                    for ($i = 0; $i <= $value->amount; $i++)
+                                        echo '<option value="' . $i . '" class="qty">' . $i . '</option>';
+                                    ?>
+                            </div>
+                        </td>
+                        <td class="subtotal hidden">0</td>
+                    </tr>
+                <?php endforeach; ?>
 
 
-    </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </main><!-- /.container -->
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="vendor/components/jquery/jquery.min.js"></script>
-<script src="vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    calc_total();
-
-    $(".custom-select").on('change', function () {
-
-        var parent = $(this).closest('tr');
-        var price = parseFloat($('.valueAmount', parent).text());
-
-        var choose = parseFloat($('.custom-select', parent).val());
-
-        console.log(price);
-        console.log(choose);
-        $('.subtotal', parent).text(choose * price);
-        calc_total();
-    })
-
-    function calc_total() {
-        var sum = 0;
-        console.log('subtotal is: ' + parseFloat($('#subtotal').text()))
-        var parent = $(this).closest('tr');
-        $('.subtotal').each(function () {
-
-            sum += parseFloat($(this).text());
-            console.log('total is: ' + sum);
-            console.log('test is: ' + parseFloat($(this).text()));
-        });
-        $('.fulltotal').text('Per second: ' + sum);
-        $('.perminute').text('Per minute: ' + sum * 60);
-        $('.perhour').text('Per Hour: ' + sum * 60 * 60);
-    }
-
-</script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.bundle.js"></script>
+<script src="assets/js/custom.js"></script>
 </body>
 </html>
