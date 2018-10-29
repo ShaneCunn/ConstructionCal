@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>My first Bootstrap-Vue app</title>
+
+    <!-- Required Stylesheets -->
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+
+    <!-- Required scripts -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+</head>
+
+<body>
+<!-- Our application root element -->
+<div id="app">
+    <b-container>
+        <b-jumbotron header="Bootstrap Vue"
+                     lead="Bootstrap 4 Components for Vue.js 2"
+        >
+            <p>For more information visit our website</p>
+            <b-btn variant="primary" href="https://bootstrap-vue.js.org/">More Info</b-btn>
+        </b-jumbotron>
+
+
+        <div class="row text-center">
+
+
+            <div class="col counter">
+                <h2 class="perhour timer count-title count-number">0</h2>
+                <p class="count-text">Per hour</p>
+            </div>
+
+            <div class="col counter">
+                <h2 class="perminute timer count-title count-number">0</h2>
+                <p class="count-text ">Per minute</p>
+            </div>
+
+            <div class="col counter">
+                <h2 class="fulltotal timer count-title count-number">0</h2>
+                <p class="count-text ">Per second</p>
+            </div>
+
+
+        </div>
+
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+
+                <th>CONSTRUCTION OBJECT</th>
+                <th>DRAIN RATE</th>
+                <th>AMOUNT</th>
+                <th class="hidden">Sub total:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="value in valueArray">
+
+                <td>{{value.name}}</td>
+                <td>{{value.usage}}</td>
+                <td class="quantity">
+                    <div class="input-group mb-3">
+                        <select class="custom-select" id="inputGroupSelect01">
+
+                            <option v-for="index in value.amount" :key="index" class="qty">{{index}}</option>
+                    </div>
+                </td>
+
+                <td>0</td>
+            </tr>
+            </tbody>
+        </table>
+    </b-container>
+</div>
+
+<!-- Start running your app -->
+<script>
+    window.app = new Vue({
+        el: "#app",
+        data: {
+            valueArray: []
+        },
+        created: function () {
+            fetch('values.json')
+                .then(res => res.json())
+                .then(res => {
+                    this.valueArray = res;
+                })
+        }
+    })
+</script>
+
+</body>
+</html>

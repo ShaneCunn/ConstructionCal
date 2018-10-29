@@ -7,9 +7,6 @@
  */
 
 
-
-
-
 ?>
 
 <!doctype html>
@@ -21,7 +18,7 @@
 
     <!-- Bootstrap CSS -->
     <!--  <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="assets/css/boostrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <style>
 
         body {
@@ -59,7 +56,7 @@
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Amount</label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01">
+                        <select class="custom-select silo" id="silo" name="siloAmount">
 
                             <option value="0" class="qty">0</option>
                             <option value="1" class="qty">1</option></div>
@@ -72,9 +69,9 @@
                 <td class="quantity">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Amount</label>
+                            <label class="input-group-text" for="inputGroupSelect02">Amount</label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01">
+                        <select class="custom-select" id="inputGroupSelect02">
 
                             <option value="0" class="qty">0</option>
                             <option value="1" class="qty">1</option>
@@ -311,30 +308,67 @@
 <script src="vendor/components/jquery/jquery.min.js"></script>
 <script src="vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+
+
+    $(document).ready(function () {
+        if (localStorage) {
+
+            $("custom-select").change(function () {
+                console.log(localStorage);
+            });
+        }
+    })
     calc_total();
 
-    $(".custom-select").on('change', function () {
 
+    $(".silo").on('change', function () {
+        // alert('test');
+        if (localStorage.type) {
+            $("#type").find("option[value=" + localStorage.siloAmount + "]").attr("selected", true);
+        }
+        if (localStorage.name) {
+            $("#name").val(localStorage.siloAmount);
+        }
         var parent = $(this).closest('tr');
-        var price = parseFloat($('.valueAmount', parent).text());
+        var siloDrain = parseFloat($('.valueAmount', parent).text());
+        var siloAmount = parseFloat($('.custom-select', parent).val());
 
-        var choose = parseFloat($('.custom-select', parent).val());
+        localStorage.setItem('siloValue', siloDrain);
+        localStorage.setItem('siloAmount', siloAmount);
+        console.log('localStore ' + localStorage.getItem('siloValue'));
+        console.log('test333 ' + localStorage.getItem('siloAmount'));
+        /* var parent = $(this).closest('tr');
+         var price = parseFloat($('.valueAmount', parent).text());
 
-        console.log(price);
-        console.log(choose);
-        $('.subtotal', parent).text(choose * price);
-        calc_total();
+         var choose = parseFloat($('.custom-select', parent).val());
+
+
+         $('.subtotal', parent).text(choose * price);
+         calc_total();*/
     })
+
+    /*  $(".custom-select").on('change', function () {
+
+          var parent = $(this).closest('tr');
+          var price = parseFloat($('.valueAmount', parent).text());
+
+          var choose = parseFloat($('.custom-select', parent).val());
+
+          console.log(price);
+          console.log(choose);
+          $('.subtotal', parent).text(choose * price);
+          calc_total();
+      })*/
 
     function calc_total() {
         var sum = 0;
-        console.log('subtotal is: ' + parseFloat($('#subtotal').text()))
+        //console.log('subtotal is: ' + parseFloat($('#subtotal').text()))
         var parent = $(this).closest('tr');
         $('.subtotal').each(function () {
 
             sum += parseFloat($(this).text());
-            console.log('total is: ' + sum);
-            console.log('test is: ' + parseFloat($(this).text()));
+            // console.log('total is: ' + sum);
+            //  console.log('test is: ' + parseFloat($(this).text()));
         });
         $('.fulltotal').text('Per second: ' + sum);
         $('.perminute').text('Per minute: ' + sum * 60);

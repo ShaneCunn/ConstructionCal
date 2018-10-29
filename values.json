@@ -30,6 +30,12 @@
     "amount": 5
   },
   {
+    "id": 6,
+    "name": "Skywall Module",
+    "usage": 0.5,
+    "amount": 10
+  },
+  {
     "id": 7,
     "name": "Vehicle Gate",
     "usage": 0.5,
