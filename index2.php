@@ -31,7 +31,7 @@ $data = $conn->query($sql);
 
     <!-- Bootstrap CSS -->
     <!--  <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="assets/css/boostrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <style>
 
         body {
@@ -109,7 +109,7 @@ $data = $conn->query($sql);
     // alert('test');
     $(".custom-select").on('change', function () {
        // var test =
-
+        var sum = 10;
         var parent = $(this).closest('tr');
         var choose1 = parseFloat($('.one', parent).val());
 
@@ -118,10 +118,18 @@ $data = $conn->query($sql);
 
         $.ajax({
             url: "ajax/response.php", // json datasource
-            data: {action: 'getData' , choose1 : choose1}, // Set the POST variable  array and adds action: getEMP
+            data: {action: 'getData' , choose1 : choose1 }, // Set the POST variable  array and adds action: getEMP
             type: 'post',  // method  , by default get
             success: function (data) {
                 console.log(data);
+               // $('.perhour').text('Per Hour: ' + sum * 60 * 60);
+
+                $('.subtotal').each(function () {
+
+                    sum += parseFloat($(this).text());
+                    console.log('total is: ' + sum);
+                    console.log('test is: ' + parseFloat($(this).text()));
+                });
             }
 
         });

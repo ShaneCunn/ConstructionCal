@@ -26,5 +26,5 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
 function getData($choose)
 {
 
-    echo $choose . '  test';
+    echo $choose . '  ajax test';
 }
